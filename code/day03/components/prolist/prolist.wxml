@@ -1,0 +1,33 @@
+<!--components/prolist/prolist.wxml-->
+<!-- <text>components/prolist/prolist.wxml</text> -->
+<!-- <view class="ul">
+  <view class="li">列表1</view>
+  <view class="li">列表2</view>
+  <view class="li">列表3</view>
+  <view class="li">列表4</view>
+  <view class="li">列表5</view>
+  <view class="li">列表6</view>
+  <view class="li">列表7</view>
+  <view class="li">列表8</view>
+  <view class="li">列表9</view>
+  <view class="li">列表10</view>
+  <view class="li">列表11</view>
+  <view class="li">列表12</view>
+  <view class="li">列表13</view>
+  <view class="li">列表14</view>
+  <view class="li">列表15</view>
+</view> -->
+
+<view class="prolist">
+<view class="proitem" wx:for="{{prolist}}" wx:key="proid">
+    <view class="itemimg">
+      <image src="{{item.proimg}}"></image>
+    </view>
+    <view class="iteminfo">
+      <view class="title">{{item.proname}}</view>
+      <view class="title">销量{{item.sales}} / 库存{{item.stock}}</view>
+      <view class="price">￥{{item.price}}</view>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,74 @@
+<!--pages/home/home.wxml-->
+<!-- <text>pages/home/home.wxml</text>222 -->
+
+<!-- view类似于div,text类似于span,image类似于img -->
+<!-- 顶级标签为page标签 -->
+<!-- <ul>
+  <li>列表1</li>
+  <li>列表2</li>
+</ul> -->
+<!-- <view class="ul">
+  <view class="li">列表1</view>
+  <view class="li">列表2</view>
+  <view class="li">列表3</view>
+  <view class="li">列表4</view>
+  <view class="li">列表5</view>
+  <view class="li">列表6</view>
+  <view class="li">列表7</view>
+  <view class="li">列表8</view>
+  <view class="li">列表9</view>
+  <view class="li">列表10</view>
+  <view class="li">列表11</view>
+  <view class="li">列表12</view>
+  <view class="li">列表13</view>
+  <view class="li">列表14</view>
+  <view class="li">列表15</view>
+</view> -->
+
+<!-- swiper滑块视图容器-->
+<!-- *this 代表的就是自己  -->
+<!-- 其中只可放置swiper-item组件，否则会导致未定义的⾏为。 -->
+<swiper indicator-dots="{{true}}" autoplay="{{true}}">
+  <swiper-item wx:for="{{bannerlist}}" wx:key="*this" >
+    <image mode="{{widthFix}}" src="{{'http://daxun.kuboy.top'+item}}"></image>
+  </swiper-item>
+  
+  <!-- <swiper-item>
+    <image src="https://res.wx.qq.com/mpres/zh_CN/htmledition/pages/login/loginpage/images/bg_banner49d02a.png"></image>
+  </swiper-item> -->
+</swiper>
+
+<!-- 父子组件传参 》》》》》》》》》》》》》》》》》》》》》》》》》-->
+<!-- 
+  vue 父组件给子组件传值>>>>>>>>>>>>>>>>>>
+  父组件在调用子组件的地方，添加一个自定义的属性，属性的值就是需要传递给子组件的值，
+  如果属性的值是变量、boolean、number数据，需要使用绑定属性
+
+  子组件定义的地方，添加一个props选项，props选项的值是一个数组或者对象
+
+  1.如果是数组，数组的元素就是自定义的属性名，可以在组件中通过此自定义属性名访问数据
+  2.如果是对象，有两种形式，
+    2.1 key值为自定义的属性名，value值为数据类型
+    2.2 key值为自定义的属性名，value为一个对象，该对象有两个选项，一个为type（数据类型），一个未default（默认值）,如果默认值是对象或者数组，需要把default写为一个函数，返回对象和数组
+ -->
+
+ <!-- 小程序>>>>>>>>>>>>>>>>>>>>>
+  父组件在调用子组件的地方，添加一个自定义的属性，属性的值就是需要传递给子组件的值，
+  如果属性的值是变量、boolean、number数据，需要使用{{}}包裹
+  <prolist prolist="{{prolist}}"/>
+  子组件定义的地方，添加一个properties选项，properties选项的值是一个对象
+
+  key值为自定义的属性名，value值为数据类型
+  properties: {
+    prolist: Array
+  }
+
+  可以在组件中通过此自定义属性名访问数据
+
+ -->
+
+<!-- 1、父组件传递数据 =》 2、prolist.js接收数据 =》3、prolist.wxml渲染-->
+<prolist prolist="{{prolist}}"></prolist>
+<!-- 组件化后可用单标签或双标签 -->
+<!-- <prolist /> -->
+
