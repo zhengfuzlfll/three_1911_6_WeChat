@@ -72,3 +72,47 @@
 <!-- 组件化后可用单标签或双标签 -->
 <!-- <prolist /> -->
 
+<!-- 返回顶部  -->
+<!-- 绑定事件 
+    vue v-on:click=""
+    react onClick={this.clickFn}
+    minpro(小程序)  移动端尽量不适用click事件，建议使用tap事件,或者使用touch代替click事件（click会出现点击穿透，双击方法屏幕）
+        bindtap
+        catchtap -----阻止冒泡
+        事件不加括号（）
+-->
+<!--  >100显示，< 100隐藏 -->
+<view class="totop" bindtap="backtop" wx:if="{{flage}}">
+  <image src="/resources/toTop.png"></image>
+  <view>返回顶部</view>
+</view>
+
+
+<!-- 首页的列表进入详情页 -->
+<!-- 
+ 声明式导航
+    vue <router-link></router-link>
+    react <Link></Link> <NavLink></NavLink>
+  编程式导航
+    new Vue({router, store, el: ''})
+    vue this.$router.push() replace() back() go()
+    react this.props.history.push() .......
+ -->
+
+ <!-- 小程序
+  声明式导航 navigator  标签跳转
+https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html
+<navigator url="" open-type=""></navigator>
+    open-type
+        navigate 保留当前页面，新添加一个页面，不能新添加tab页面 ---- push
+        redirect 替换当前页面，不能替换tab页面  ---- replace
+        switchTab 切换当前的tab页面 ---  小程序独属
+        navigateBack 返回  ----  back  goBack
+
+》》》》》》》》》》》》》》在prolist组件中添加跳转
+
+  编程式导航  - js跳转 - window.location.href=""
+https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.switchTab.html
+ 
+  -->
+

@@ -18,7 +18,7 @@
   <view class="li">列表15</view>
 </view> -->
 
-<view class="prolist">
+<!-- <view class="prolist">
 <view class="proitem" wx:for="{{prolist}}" wx:key="proid">
     <view class="itemimg">
       <image src="{{item.proimg}}"></image>
@@ -29,5 +29,35 @@
       <view class="price">￥{{item.price}}</view>
     </view>
   </view>
+</view> -->
+
+<!-- 声明式跳转  带参数跳转
+ vue 
+    router-link :to="{ name: 'detail', params: { proid: item.proid}}"
+    router-link :to="{ name: 'detail', query: { proid: item.proid}}"
+    router-link :to="'/detail/' + item.proid"
+    router-link :to="'/detail?proid=' + item.proid"
+  
+  小程序
+    url="/pages/detail/detail?proid=123&name=456"
+
+    另一个页面的 onLoad的生命周期函数的参数就是传递的值 ----      pages/detail/detail.js
+
+ -->
+<view class="prolist">
+  <!-- <navigator url="/pages/detail/detail" wx:for="{{prolist}}" wx:key="proid"> -->
+  <!-- 1、传递参数 prolist.wxml  2、接收参数 detail.js  onLoad()-->
+  <navigator url="{{'/pages/detail/detail?proid='+item.proid}}" wx:for="{{prolist}}" wx:key="proid">
+    <view class="proitem" >
+      <view class="itemimg">
+        <image src="{{item.proimg}}"></image>
+      </view>
+      <view class="iteminfo">
+        <view class="title">{{item.proname}}</view>
+        <view class="title">销量{{item.sales}} / 库存{{item.stock}}</view>
+        <view class="price">￥{{item.price}}</view>
+      </view>
+    </view>
+  </navigator>
 </view>
 

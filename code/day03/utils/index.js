@@ -39,4 +39,19 @@ export function request(options){
       }
     })
   })
+
+
+}
+
+/**
+ * 封装提示信息的方法 toast
+ */
+
+export function toast(options){
+  const {title,icon,duration} =options
+  wx.showToast({
+    title,
+    icon: icon || "none",//success/loading/none
+    duration: duration || 2000
+  })
 }
