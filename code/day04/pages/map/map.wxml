@@ -1,0 +1,25 @@
+<!--pages/map/map.wxml-->
+<!-- <text>pages/map/map.wxml</text> -->
+
+<!-- 地图使用map组件 -->
+<!-- 
+  markers  需要通过js去设置
+ -->
+<!-- <map 
+  class="map" 
+  longitude="116.3974700000" 
+  latitude="39.9088230000"
+  scale="20"
+  markers="{{markers}}"
+  controls="{{controls}}"
+  bindcontroltap="controlshandler"
+></map> -->
+<map 
+  class="map" 
+  longitude="{{longitude}}" 
+  latitude="{{latitude}}"
+  scale="20"
+  markers="{{markers}}"
+  controls="{{controls}}"
+  bindcontroltap="controlshandler"
+></map>

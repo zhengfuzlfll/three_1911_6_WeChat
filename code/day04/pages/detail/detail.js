@@ -26,13 +26,23 @@ Page({
       // url:"/pro/detail?proid="+proid,
       url: `/pro/detail?proid=${proid}`,
     }).then(res=>{
+       console.log("详情页请求数据", res.data)
+      /* 抽离 */
+      /* 如果详情页面的数据处理特别庞大，建议抽离处理 */
+      this.getDetailData(res,proid)
+    }  
+    )
+  },
+  /* 抽离数据出来 */
+  getDetailData(res,proid){
+
       /* 1、获取到数据 */
-      console.log("详情页请求数据",res.data)
+     
       /* 结构赋值 */
       // const { proname, proimg, detail, price } = res.data.data
       /* 解构赋值进阶版=》 */
       // const { data: { proname, proimg, detail, price} } = res.data
-      const { data: { data: { proname, proimg, detail, price }} } = res
+      const { data: { data: { proname, proimg, detail, price } } } = res
       /**
        * const {data}=res.data
        * const { proname, proimg, detail, price}=data
@@ -45,8 +55,9 @@ Page({
         detail,
         price
       })
-    })
+    
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
