@@ -1,4 +1,9 @@
 // pages/map/map.js
+const app=getApp()  //获取到全局的信息
+console.log("map.js获取全局信息",app.globalData)
+// const { screenHeight, screenWidth } = app.globalData
+/* 获取到屏幕的高度，宽度 */
+const { globalData: { screenHeight, screenWidth}  } = app
 Page({
 
   /**
@@ -35,7 +40,8 @@ Page({
       id: 1,
       position: {
         left: 30,//获取设备的宽度、高度，获取设备的基本信息  =》app.js
-        top: 30,
+        // top: 30,
+        top: screenHeight-100,
         width: 30,
         height: 30
       },

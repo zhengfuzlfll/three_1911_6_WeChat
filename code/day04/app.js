@@ -8,6 +8,10 @@
 App({
   /* 1、监听小程序的初始化 */
   onLaunch: function () {
+    /* 获取设备信息 */
+    this.getDeviceInfoFn()
+
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -41,6 +45,17 @@ App({
     })
   },
 
+  /* 获取设备信息方法封装 */
+  getDeviceInfoFn(){
+    wx.getSystemInfo({
+      success: (res)=> {
+        console.log("获取设备信息",res)
+        /* 修改全局数据 */
+        this.globalData.deviceinfo=res
+      },
+    })
+  },
+
   /* 2、监听小程序启动或切前台 */
   onShow(){
     console.log("show")
@@ -60,7 +75,8 @@ App({
 
   /* 自定义的全局的变量，可以是任何的数据类型 --状态管理器*/
   globalData: {
-    userInfo: null
+    userInfo: null,
+    deviceinfo:null
   },
   /* 全局自定义函数 */
   fn(){
