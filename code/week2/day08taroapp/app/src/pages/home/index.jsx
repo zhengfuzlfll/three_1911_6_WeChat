@@ -7,6 +7,9 @@ import { request } from "../../utils/index.jsx";
 /* 引用样式 */
 import "./index.scss"; //生成/home/index.wxss文件
 
+/* 引入子组件 */
+import Prolist from "./../../components/prolist";
+
 class Index extends Component {
   //生成一个home/index.json文件-----配置页面
   config = {
@@ -25,12 +28,13 @@ class Index extends Component {
     /* 1设置状态------- */
     /* 2、请求数据---封装工具方法src/utils/ */
     this.state = {
-      bannerlist: [] //轮播图
+      bannerlist: [], //轮播图
+      prolist: [], //列表数 据
+      pageCode: 1 //上拉加载
     };
   }
 
   /* 3、请求数据 */
-
   componentDidMount() {
     //轮播图
     request({
@@ -41,30 +45,92 @@ class Index extends Component {
         bannerlist: res.data.data
       });
     });
+
     //列表数据
+    request({
+      url: "/pro"
+    }).then(res => {
+      console.log("列表数据", res.data);
+      this.setState({
+        prolist: res.data.data
+      });
+    });
+  }
+
+  /*下拉刷新  =>即重新请求第一页的数据 */
+  onPullDownRefresh() {
+    request({
+      url: "/pro"
+    }).then(res => {
+      console.log("下拉刷新", res);
+      this.setState({
+        prolist: res.data.data,
+        pageCode: 1 // 必须重置页码++++++++++++++++++
+      });
+      /* 停止下拉刷新，这句话一定要加，真机测试时一直处于加载状态 */
+      Taro.stopPullDownRefresh();
+    });
+  }
+
+  /* 上拉加载下一页数据 */
+  onReachBottom() {
+    request({
+      url: "/pro",
+      data: {
+        pageCode: this.state.pageCode
+      }
+    }).then(res => {
+      console.log("上拉加载", res);
+      if (res.data.code === "10000") {
+        Taro.showToast({
+          title: "没有更多数据了",
+          icon: "null"
+        });
+      } else {
+        /* 获取数据   处理数据   修改状态 */
+        /*获取 */
+        let prolist = this.state.prolist;
+        let pageCode = this.state.pageCode;
+
+        /*数据的增加即为 数组合并 */
+        prolist = [...prolist, ...res.data.data];
+        pageCode += 1;
+
+        this.setState({
+          prolist,
+          pageCode
+        });
+      }
+    });
   }
 
   render() {
     // return <view>首页</view>;
     return (
-      <Swiper indicatorDots autoplay circular>
-        {this.state.bannerlist.map((item, index) => (
-          <SwiperItem key={index}>
-            <Image
-              className="bannerimg"
-              src={"http://daxun.kuboy.top" + item}
-              style={{ width: "100%" }}
-              mode="aspectFit"
-            ></Image>
-          </SwiperItem>
-        ))}
-        {/* <SwiperItem>
+      <View>
+        <Swiper indicatorDots autoplay circular>
+          {this.state.bannerlist.map((item, index) => (
+            <SwiperItem key={index}>
+              <Image
+                className="bannerimg"
+                src={"http://daxun.kuboy.top" + item}
+                style={{ width: "100%" }}
+                mode="aspectFit"
+              ></Image>
+            </SwiperItem>
+          ))}
+          {/* <SwiperItem>
           <Image src="../../resources/home.png"></Image>
         </SwiperItem>
         <SwiperItem>
           <Image src="../../resources/home.png"></Image>
         </SwiperItem> */}
-      </Swiper>
+        </Swiper>
+
+        {/* 子组件 */}
+        {/* 向子组件数据 */}
+        <Prolist prolist={this.state.prolist}></Prolist>
+      </View>
     );
   }
 }
