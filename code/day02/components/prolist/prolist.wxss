@@ -1,5 +1,0 @@
-/* components/prolist/prolist.wxss */
-.ul{}
-.ul .li{
-  height: 50px;
-}
