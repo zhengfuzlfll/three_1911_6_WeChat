@@ -1,0 +1,13 @@
+/* pages/map/map.wxss */
+/* 
+  网页开发
+  html{width:100%;height:100%}
+ */
+ /* 小程序的根元素为page */
+ page{
+   height: 100%;
+ }
+.map{
+  width: 100%;
+  height: 100%;
+}
