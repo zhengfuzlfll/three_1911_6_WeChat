@@ -9,5 +9,20 @@
 // .bannerimg {
 //   width: 100%;
 // }
+/* 返回顶部样式 */
+.totop {
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  background: #efefef;
+  // width: 30px;
+  // height: 50px;
+  text-align: center;
 
-
+  .img2 {
+    width: 30px;
+    height: 30px;
+    // background: yellow;
+    margin: auto;
+  }
+}

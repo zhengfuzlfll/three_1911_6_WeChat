@@ -108,6 +108,7 @@ class Index extends Component {
     // return <view>首页</view>;
     return (
       <View>
+        {/* 轮播图 */}
         <Swiper indicatorDots autoplay circular>
           {this.state.bannerlist.map((item, index) => (
             <SwiperItem key={index}>
@@ -126,6 +127,22 @@ class Index extends Component {
           <Image src="../../resources/home.png"></Image>
         </SwiperItem> */}
         </Swiper>
+
+        {/* 返回顶部 */}
+        <View
+          className="totop"
+          onClick={() => {
+            Taro.pageScrollTo({
+              scrollTop: 0,
+              duration: 500
+            });
+          }}
+          
+        >
+          {/* <Image className="img2" src="./../../resources/home.png"></Image> */}
+          <View className="img2">↑</View>
+          <View className="title">返回顶部</View>
+        </View>
 
         {/* 子组件 */}
         {/* 向子组件数据 */}
