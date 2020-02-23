@@ -39,6 +39,13 @@
 					"id": -1,
 					"name": "详情页",
 					"pathName": "pages/detail/detail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/login/index",
 					"scene": null
 				}
 			]

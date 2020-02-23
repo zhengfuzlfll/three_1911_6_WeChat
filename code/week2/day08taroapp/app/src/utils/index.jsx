@@ -12,7 +12,7 @@ export function request(options) {
     Taro.request({
       url: baseUrl + url,
       data: data || {},
-      methhod: method || "GET",
+      method: method || "GET",
       header: header || {},
       success: res => {
         resolve(res);
