@@ -124,6 +124,11 @@ class Index extends Component {
 
                 try {
                   //登录成功，存入用户id,存入token，返回上一页
+                  // Taro.setStorageSync("userid", res.data.data.userid);
+                  // Taro.setStorageSync("token", res.data.data.token);
+                  // Taro.navigateBack();
+                  // console.log("res.data.data.userid", res.data.data.userid);
+                  // console.log("res.data.data.token", res.data.data.token);
                   Taro.setStorageSync("userid", res.data.data.userid);
                   Taro.setStorageSync("token", res.data.data.token);
                   Taro.navigateBack();

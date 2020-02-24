@@ -6,6 +6,12 @@ import "./index.scss";
 
 class Index extends Component {
   render() {
+    // Cannot read property 'map' of undefined
+    let { prolist = [] } = this.props;
+    if (!prolist) {
+      return <View>还未获取到列表</View>;
+    }
+
     /* 子组件接收数据 this.props */
     console.log("子组件prolist", this.props.prolist);
 

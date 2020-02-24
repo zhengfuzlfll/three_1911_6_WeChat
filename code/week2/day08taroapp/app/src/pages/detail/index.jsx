@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image } from "@tarojs/components";
+import { View, Image, Button } from "@tarojs/components";
 import { request } from "../../utils";
 
 class Index extends Component {
@@ -38,6 +38,65 @@ class Index extends Component {
     });
   }
 
+  /* 加入购物车 方法 */
+  addCart() {
+    try {
+      let userid = Taro.getStorageSync("userid");
+      let token = Taro.getStorageSync("token");
+      // console.log("userid:", userid);
+      // console.log("token:", token);
+      if (userid && token) {
+        /* 获取到userid,token */
+        request({
+          url: "/cart/add",
+          method: "POST",
+          data: {
+            userid,
+            token,
+            proid: this.state.proid,
+            num: 1
+          },
+          // POST 请求   此处需要添加头信息，否则将出现添加购物车到登录的死循环
+          header: { "content-type": "application/json; charset=utf-8" }
+        }).then(res => {
+          console.log("加入购物车:", res);
+          if (res.data.code === "10119") {
+            Taro.showToast({
+              //token无效
+              title: "登录失效，请重新登录",
+              icon: "none",
+              duration: 3000
+            });
+            /* 跳转至登录页面 */
+            Taro.navigateTo({
+              url: "/pages/login/index"
+            });
+          } else {
+            Taro.showToast({
+              //token无效
+              title: "加入购物车成功",
+              icon: "none",
+              duration: 3000
+            });
+          }
+        });
+      } else {
+        /* 未登录*/
+        Taro.showToast({
+          title: "您还未登录，请先登录",
+          icon: "none",
+          duration: 3000
+        });
+        /* 跳转至登录页面 */
+        Taro.navigateTo({
+          url: "/pages/login/index"
+        });
+      }
+    } catch (error) {
+      console.log("error  加入购物车错误", error);
+    }
+  }
+
   /* 设置初始值 */
   render() {
     return (
@@ -48,6 +107,10 @@ class Index extends Component {
         <Image src={this.state.proimg}></Image>
         <View>{this.state.proname}</View>
         <View>￥{this.state.price}</View>
+        {/* +++++++++++++++++ */}
+        <Button type="primary" onClick={this.addCart.bind(this)}>
+          加入购物车
+        </Button>
       </View>
     );
   }
