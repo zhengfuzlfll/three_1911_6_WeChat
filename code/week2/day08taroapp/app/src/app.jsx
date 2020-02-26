@@ -27,7 +27,8 @@ class App extends Component {
       "pages/cart/index",
       "pages/user/index",
       "pages/detail/index",
-      "pages/login/index"
+      "pages/login/index",
+      "pages/order/index"
     ],
     window: {
       //窗口表现

@@ -1,6 +1,13 @@
 import Taro, { Component } from "@tarojs/taro";
 //View 单独引入，React说明  组件的首字母一定要大写，小写被当成html标签
-import { View, Image, Text, Checkbox, CheckboxGroup } from "@tarojs/components";
+import {
+  View,
+  Image,
+  Text,
+  Checkbox,
+  CheckboxGroup,
+  Button
+} from "@tarojs/components";
 
 /* 工具方法 */
 import { request } from "../../utils/index.jsx";
@@ -352,6 +359,54 @@ class Index extends Component {
             })}
             <View>总数：{this.state.totalNum}</View>
             <View>总价:￥{this.state.totalPrice}</View>
+
+            {/* 提交订单----------------- */}
+            <Button
+              onClick={() => {
+                //参数list为选中的商品,将选中的商品过滤出来
+                let list = [];
+                this.state.cartlist.map(itm => {
+                  if (itm.flag) {
+                    list.push(itm);
+                  }
+                });
+                try {
+                  let userid = Taro.getStorageSync("userid");
+                  let token = Taro.getStorageSync("token");
+                  request({
+                    url: "/order/add",
+                    method: "POST",
+                    data: {
+                      userid,
+                      token,
+                      list: JSON.stringify(list)
+                    },
+                    header: {
+                      "content-type": "application/json; charset=utf-8"
+                    }
+                  }).then(res => {
+                    console.log("提交订单", res);
+                    // 购物车提交到订单后，购物车的数据会自动清空
+                    if (res.data.code === "10119") {
+                      Taro.showToast({
+                        title: "您尚未登录，请先登录",
+                        icon: "null",
+                        duration: 3000
+                      });
+                      Taro.navigateTo({
+                        url: "/pages/login/index"
+                      });
+                    } else {
+                      Taro.navigateTo({
+                        url: "/pages/order/index?id=" + res.data.data
+                      });
+                    }
+                  });
+                } catch (error) {}
+              }}
+            >
+              提交订单
+            </Button>
           </View>
         )}
       </View>
