@@ -11,9 +11,8 @@ class Index extends Component {
     if (!prolist) {
       return <View>还未获取到列表</View>;
     }
-
     /* 子组件接收数据 this.props */
-    console.log("子组件prolist", this.props.prolist);
+    // console.log("子组件prolist", this.props.prolist);
 
     return (
       <View className="prolist">
