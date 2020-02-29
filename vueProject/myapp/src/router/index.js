@@ -1,22 +1,48 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
+// import Home from '../views/home/index.vue'
+import Footer from '@/components/Footer.vue'
 
 Vue.use(VueRouter)
 
+// 路由懒加载，（不在头部全部引入，否则每次加载都全部加载一次）
 const routes = [
-  {
+  { // 重定向
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/home'
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/home',
+    name: 'home', // 命名路由，可以用于声明式导航传参
+    components: { // 路由懒加载，
+      default: () => import('@/views/home/index.vue'),
+      footer: Footer
+    }
+  },
+  {
+    path: '/kind',
+    name: 'kind', // 命名路由，可以用于声明式导航传参
+    components: { // 路由懒加载，
+      default: () => import('@/views/kind/index.vue'),
+      footer: Footer
+    }
+  },
+  {
+    path: '/cart',
+    name: 'cart', // 命名路由，可以用于声明式导航传参
+    components: { // 路由懒加载，
+      default: () => import('@/views/cart/index.vue'),
+      footer: Footer
+    }
+  },
+  {
+    path: '/user',
+    name: 'user', // 命名路由，可以用于声明式导航传参
+    components: { // 路由懒加载，
+      default: () => import('@/views/user/index.vue'),
+      footer: Footer
+    }
   }
 ]
 
