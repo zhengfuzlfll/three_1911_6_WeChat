@@ -82,6 +82,33 @@ body,
     .header {
       @include rect(100%, 0.44rem);
       @include background-color(#f66);
+      //首页的头部
+      ul {
+        @include rect(100%, 100%);
+        @include flexbox();
+        @include color(#fff);
+        li {
+          @include flexbox();
+          &:nth-child(1),
+          &:nth-child(3) {
+            @include rect(50px, 100%);
+            @include flex-direction(column);
+            @include justify-content();
+            @include align-items();
+            img{
+               @include rect(50px, 100%);
+            }
+          }
+          &:nth-child(2) {
+            @include flex();
+            @include background-color(#fff);
+            @include color(#666);
+            @include margin(8px);
+            @include padding(5px 10px);
+            @include border-radius(10px);
+          }
+        }
+      }
     }
     .content {
       @include flex(); //flex:1;
