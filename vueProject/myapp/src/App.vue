@@ -113,7 +113,7 @@ body,
     .content {
       @include flex(); //flex:1;
       @include rect(100%, auto);
-      @include overflow(auto); // 产生滚动条
+      @include overflow(auto); // 产生滚动条 ++++++++++++++
     }
   }
   .footer {

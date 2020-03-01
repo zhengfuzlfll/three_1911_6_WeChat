@@ -3,7 +3,8 @@
     <header class="header">
       <ul>
         <li>
-          <img src="https://res.darryring.com/wapimg/common/logo2.png" alt />
+          <!-- <img src="https://res.darryring.com/wapimg/common/logo2.png" alt /> -->
+          logo
         </li>
         <li><span class="iconfont icon-sousuo"></span>请输入查找的产品</li>
         <li>消息</li>
@@ -17,26 +18,35 @@
         </van-swipe-item>
       </van-swipe>
       <!-- 列表商品 -->
-      <van-card
-        v-for = "(item, index) in prolist"
-        :key = "index"
-        :price="item.price"
-        :desc="item.note"
-        :title="item.proname"
-        :thumb="item.proimg"
-      />
+      <!-- 添加下拉刷新 -->
+      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+        <!-- 下拉加载 -->
+        <van-list   v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+          <van-card
+            v-for = "(item, index) in prolist"
+            :key = "index"
+            :price="item.price"
+            :desc="item.note"
+            :title="item.proname"
+            :thumb="item.proimg"
+          />
+        </van-list>
+      </van-pull-refresh>
     </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { Swipe, SwipeItem, Lazyload, Card } from 'vant'
+import { Swipe, SwipeItem, Lazyload, Card, PullRefresh, Toast, List } from 'vant'
 import { getBannerlist, getProlist } from '@/api/home.js'
 Vue.use(Swipe)
 Vue.use(SwipeItem)
 Vue.use(Lazyload)
 Vue.use(Card)
+Vue.use(PullRefresh)
+Vue.use(Toast)
+Vue.use(List)
 export default {
   data () {
     return {
@@ -44,7 +54,11 @@ export default {
         'https://img.yzcdn.cn/vant/apple-1.jpg',
         'https://img.yzcdn.cn/vant/apple-2.jpg'
       ],
-      prolist: []
+      prolist: [],
+      isLoading: false, // true表示现在正在下拉刷新状态中
+      pageCode: 1,
+      finished: false, // true表示没有更多数据了
+      loading: false // true表示正在上拉加载下一页数据
     }
   },
   mounted () {
@@ -82,6 +96,28 @@ export default {
       // this.prolist = res.data
       this.prolist = res.data.data
     })
+  },
+  methods: {
+    // 下拉刷新
+    onRefresh () {
+      console.log('下拉刷新')
+      this.isLoading = true // 正在加载
+      getProlist({
+        url: '/pro'
+      }).then(res => {
+        console.log('列表页', res.data)
+        // this.prolist = res.data
+        this.prolist = res.data.data
+        this.pageCode = 1 // 页码重置
+        this.isLoading = false // 下拉刷新完毕
+        this.finished = false // 表示可以继续上拉finished显示没有数据了
+        Toast('刷新完成')
+      })
+    },
+    // 下拉加载
+    onLoad () {
+      console.log('下拉加载')
+    }
   }
 }
 </script>
