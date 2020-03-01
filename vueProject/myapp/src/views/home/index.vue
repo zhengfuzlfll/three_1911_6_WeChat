@@ -18,10 +18,12 @@
       </van-swipe>
       <!-- 列表商品 -->
       <van-card
-        price="2.00"
-        desc="描述信息"
-        title="商品标题"
-        thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+        v-for = "(item, index) in prolist"
+        :key = "index"
+        :price="item.price"
+        :desc="item.note"
+        :title="item.proname"
+        :thumb="item.proimg"
       />
     </div>
   </div>
@@ -30,7 +32,7 @@
 <script>
 import Vue from 'vue'
 import { Swipe, SwipeItem, Lazyload, Card } from 'vant'
-import { getBannerlist } from '@/api/home.js'
+import { getBannerlist, getProlist } from '@/api/home.js'
 Vue.use(Swipe)
 Vue.use(SwipeItem)
 Vue.use(Lazyload)
@@ -41,10 +43,12 @@ export default {
       bannerlist: [
         'https://img.yzcdn.cn/vant/apple-1.jpg',
         'https://img.yzcdn.cn/vant/apple-2.jpg'
-      ]
+      ],
+      prolist: []
     }
   },
   mounted () {
+    /* 轮播图 */
     getBannerlist({
       url: '/pro/banner'
     }).then(res => {
@@ -58,12 +62,25 @@ export default {
       量名指向的地址不变，并不保证该地址的数据不变，
       所以将一个对象声明为常量必须非常小心。 */
       const arr = [] // 引用类型，地址没有发生改变，用const
-      res.data.map(item => {
+      // res.data.map(item => {
+      //   arr.push('http://daxun.kuboy.top' + item)
+      //   return ''
+      // })
+      res.data.data.map(item => {
         arr.push('http://daxun.kuboy.top' + item)
         return ''
       })
       this.bannerlist = arr
       console.log('this.bannerlist', this.bannerlist)
+    })
+
+    /* 列表数据 */
+    getProlist({
+      url: '/pro'
+    }).then(res => {
+      console.log('列表页', res.data)
+      // this.prolist = res.data
+      this.prolist = res.data.data
     })
   }
 }

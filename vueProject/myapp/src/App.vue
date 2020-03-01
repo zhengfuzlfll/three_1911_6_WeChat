@@ -95,8 +95,8 @@ body,
             @include flex-direction(column);
             @include justify-content();
             @include align-items();
-            img{
-               @include rect(50px, 100%);
+            img {
+              @include rect(50px, 100%);
             }
           }
           &:nth-child(2) {
@@ -113,6 +113,7 @@ body,
     .content {
       @include flex(); //flex:1;
       @include rect(100%, auto);
+      @include overflow(auto); // 产生滚动条
     }
   }
   .footer {
