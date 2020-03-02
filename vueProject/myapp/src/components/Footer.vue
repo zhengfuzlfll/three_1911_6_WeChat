@@ -26,6 +26,8 @@
 <style lang="scss">
 @import "@/lib/reset.scss";
 .footer {
+  position: fixed;
+  bottom: 0;
   ul {
     li {
       /* 声明式导航中，当被点击时 自动生成 router-link-exact-active router-link-active 样式*/

@@ -43,6 +43,13 @@ const routes = [
       default: () => import('@/views/user/index.vue'),
       footer: Footer
     }
+  },
+  {
+    path: '/detail/:proid',
+    name: 'detail', // 命名路由，可以用于声明式导航传参
+    components: { // 路由懒加载，
+      default: () => import('@/views/detail/index.vue')
+    }
   }
 ]
 

@@ -21,16 +21,44 @@
       <!-- 添加下拉刷新 -->
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <!-- 下拉加载 -->
-        <van-list   v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <van-card
+        <!-- <van-list   v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad"> -->
+          <!-- <van-card
             v-for = "(item, index) in prolist"
             :key = "index"
             :price="item.price"
             :desc="item.note"
             :title="item.proname"
             :thumb="item.proimg"
+          /> -->
+          <!-- 声明式跳转 方法一:命名路由的传参 -->
+          <!-- <router-link :to="{ name: 'detail', params: { proid: item.proid } }" v-for="item of prolist" :key="item.proid">
+            <van-card
+              :price="item.price"
+              :desc="item.note"
+              :title="item.proname"
+              :thumb="item.proimg"
+            />
+          </router-link> -->
+          <!-- 方式二  字符串拼接-->
+          <!-- <router-link :to="'/detail/' + item.proid" v-for="item of prolist" :key="item.proid">
+            <van-card
+              :price="item.price"
+              :desc="item.note"
+              :title="item.proname"
+              :thumb="item.proimg"
+            />
+          </router-link> -->
+          <!--编程式跳转 -->
+          <van-card
+            v-for="item of prolist"
+            :key="item.proid"
+            :price="item.price"
+            :desc="item.note"
+            :title="item.proname"
+            :thumb="item.proimg"
+            @click="toDetail(item.proid)"
           />
-        </van-list>
+       <!-- </van-list> -->
       </van-pull-refresh>
     </div>
   </div>
@@ -117,15 +145,24 @@ export default {
     // 下拉加载
     onLoad () {
       console.log('下拉加载')
+    },
+    /* 编程式导航 */
+    toDetail (proid) {
+      console.log(proid)
+      // this.$router.push('/detail/' + proid)
+      // this.$router.push({ name: 'detail', params: { proid } })
+      this.$router.push({ path: '/detail/' + proid })
     }
   }
 }
 </script>
 
 <style lang="scss">
-//自带class
+@import "@/lib/reset.scss";
+//自带class  轮播图
 .van-swipe {
-  max-height: 180px;
+  height: 180px;
+  overflow: hidden;
   img {
     width: 100%;
   }
