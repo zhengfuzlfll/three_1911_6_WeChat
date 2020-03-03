@@ -52,7 +52,7 @@ html, body, #root, .container {
     ul {
       @include rect(100%, 100%);
       @include flexbox();
-     li {
+     a {
         @include flex();
         @include color(#333);
         // 内部元素水平垂直居中

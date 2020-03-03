@@ -1,16 +1,6 @@
-import React, { Component } from 'react'
+/* 容器组件 */
+import { connect } from 'react-redux' //高阶组件的connect
+import UI from './UI.jsx'
 
-export default class extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
-    render() {
-        return (
-            <div className="box">
-                <header className="header">首页</header>
-                <div className="content">首页</div>
-            </div>
-        )
-    }
-}
+const Com = connect()(UI) //把一个组件作为它的参数，并返回一个新的组件
+export default Com

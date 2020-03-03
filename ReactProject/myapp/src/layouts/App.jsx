@@ -10,7 +10,7 @@ import User from '@/views/user/index.jsx'
 import Not from '@/views/not/index.jsx'
 
 /* 引入路由 */
-import {Route,Switch, Redirect} from 'react-router-dom';
+import {Route,Switch, Redirect, NavLink} from 'react-router-dom';
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
         {/* <!-- 底部导航 --> */}
         <ul>
           {/* <!-- router-link默认被渲染为a标签，使用tag标签生成需要的标签 --> */}
-          <li >
+          {/* <li >
             <span className="iconfont icon-yemian-copy-copy-copy-copy"></span>
             <p>首页</p>
           </li>
@@ -49,7 +49,23 @@ function App() {
           <li >
             <span className="iconfont icon-wodedangxuan"></span>
             <p>我的</p>
-          </li>
+          </li> */}
+          <NavLink to='/home' activeStyle={ { color: '#f66' } }>
+            <span className="iconfont icon-yemian-copy-copy-copy-copy"></span>
+            <p>首页</p>
+          </NavLink>
+          <NavLink to='/kind' activeStyle={ { color: '#f66' } }>
+            <span className="iconfont icon-leimupinleifenleileibie"></span>
+            <p>分类</p>
+          </NavLink>
+          <NavLink  to='/cart' activeStyle={ { color: '#f66' } }>
+            <span className="iconfont icon-gouwuche"></span>
+            <p>购物车</p>
+          </NavLink>
+          <NavLink to='/user' activeStyle={ { color: '#f66' } }>
+            <span className="iconfont icon-wodedangxuan"></span>
+            <p>我的</p>
+          </NavLink>
         </ul>
       </footer>
     </div>
