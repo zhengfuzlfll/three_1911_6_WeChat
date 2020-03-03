@@ -50,6 +50,13 @@ const routes = [
     components: { // 路由懒加载，
       default: () => import('@/views/detail/index.vue')
     }
+  },
+  {
+    path: '/login',
+    name: 'login', // 命名路由，可以用于声明式导航传参
+    components: { // 路由懒加载，
+      default: () => import('@/views/login/index.vue')
+    }
   }
 ]
 
